@@ -1,0 +1,45 @@
+procFiles: /fenrirdata1/kg_data/pipeline_output/WASP80b_WLP4/ROEBA/splintegrate/jw01185002001_01101_00001-seg*.fits ## files on which to do spec extraction
+excludeList: null
+srcName: WASP80b_WLP4_NRCA3
+srcNameShort: NRCA3_WASP80b
+nightName: NRCA3_WASP80b_2022_09_30
+refStarPos: ## positions of the stars in the spatial direction. The first one is the target
+- [1056.75,167.5]
+refPhotCentering: null ## photometry fits file where to obtain centroid shifts to apply from 1 star/source
+copyCentroidFile: null ## photometry or centroid fits file where to obtain centroids to avoid re-calculating
+srcGeometry: Circular ## Source aperture geometry, Circular or Rectangular
+bkgSub: True ## Do background subtraction?
+bkgGeometry: CircularAnnulus ## Background geometry, Circular Annulus or Rectangular
+bkgMethod: mean #colrow ## Method for background estimate (mean, median, robust mean)
+apRadius: 3 #Source aperture radius
+apHeight: null ## Source aperture height (only for rectangular aperture)
+apWidth: null ## Source aperture width (only for rectangular aperture)
+#nanTreatment: 'zero' ## How to treat NaNs in image? 'zero' will set to 0. 'value' will set to nanReplaceValue
+backStart: 4 #ckground annulus start radius
+backEnd: 5 #ackground annulus end radius
+backHeight: null ## background aperture height (for rectangular background)
+backWidth: null ## background aperture width (only for rectangular aperture)
+backOffset: [0.,0.] ## Background offset (from source centroid)
+boxFindSize: 5 ## the half-width of the box used for source centroiding
+jdRef: 2459832 ## JD reference offset to subtract
+timingMethod: JWSTint ## how to assign integration times? None, 'JWSTint' will add int time
+scaleAperture: False ## Scale the aperture with the FWHM?
+apScale: 2.5 ## number of times the FWHM for aperture-scaling
+apRange: [2,17] ## min/max range of allowed FHWM, when scaling
+isCube: False ## Is the data a cube (3D)?
+cubePlane: 0 ## The plane to choose if data is in cubes
+doCentering: True #Center the aperturess with Gaussian?
+FITSextension: 0 ## FITS extension of science frames
+HEADextension: 0 ## FITS extension of the header info (for exposure and timing)
+isSlope: True ## Is the FITS image a slope image that should be multiplied by the int time?
+subpixelMethod: exact ## Method for subpixel positions in aperture photometry. "exact" will calculate exactly while "center" will use whole pixels (faster to run)
+readNoise: 16.2 ## Read noise in electrons
+detectorGain: 2.05  ## Optionally specify the detector gain e-/DN
+dateFormat: Two Part ## Format of date. "Two Part" is split over DATE-OBS and TIME-OBS, whereas "One Part" is all in DATE-OBS
+diagnosticMode: False ## diagnostic mode where you will show intermediate steps like row-by-row fits?
+bkgOrderX: 0 ## polynomial order for row-by-row background subtraction (if bkgMethod is 'colrow')
+bkgOrderY: 0 ## polynomial order for col-by-col background subtraction (if bkgMethod is 'colrow')
+backsub_directions: ['X'] ## directions and order in which to do polynomial colrow subtraction
+saturationVal: null ## put in a value so that if the source aperture has more than satNPix points, it's counted as NaN. If None, ignored.
+satNPix: 5 ## number of pixels above saturation to declare as Nan
+nanReplaceValue: 22e3 ## replacement value for NaNs if nanTreatment is set at "value"
