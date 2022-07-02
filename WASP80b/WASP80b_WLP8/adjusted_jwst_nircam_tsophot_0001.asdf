@@ -1,0 +1,33 @@
+#ASDF 1.0.0
+#ASDF_STANDARD 1.2.0
+%YAML 1.1
+%TAG ! tag:stsci.edu:asdf/
+--- !core/asdf-1.1.0
+asdf_library: !core/software-1.0.0 {author: Space Telescope Science Institute, homepage: 'http://github.com/spacetelescope/asdf',
+  name: asdf, version: 2.7.2}
+history:
+  entries:
+  - !core/history_entry-1.0.0 {description: File created based on values of aperture
+      radii for NIRCam that were specified as constants in tso_photometry_step.py.,
+    time: ! '2018-07-13 17:20:05'}
+  extensions:
+  - !core/extension_metadata-1.0.0
+    extension_class: asdf.extension.BuiltinExtension
+    software: {name: asdf, version: 2.1.0.dev1406}
+meta:
+  author: NIRCam IDT; P. Hodge
+  date: '2018-07-13T17:20:00'
+  description: aperture radii for tso_photometry
+  exposure: {type: NRC_TSIMAGE}
+  filename: nircam_tsophot.asdf
+  instrument: {name: NIRCAM}
+  model_type: TsoPhotModel
+  pedigree: GROUND
+  reftype: tsophot
+  telescope: JWST
+  useafter: '2015-01-01T00:00:00'
+  visit: {tsovisit: true}
+radii:
+- {pupil: WLP8, radius: 50.0, radius_inner: 60.0, radius_outer: 70.0}
+- {pupil: ANY, radius: 29.0, radius_inner: 80.0, radius_outer: 100.0}
+...
