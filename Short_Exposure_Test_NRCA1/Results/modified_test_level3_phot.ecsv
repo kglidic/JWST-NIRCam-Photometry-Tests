@@ -1,0 +1,84 @@
+# %ECSV 0.9
+# ---
+# datatype:
+# - {name: MJD, datatype: float64}
+# - {name: aperture_sum, unit: Jy, datatype: float64}
+# - {name: aperture_sum_err, unit: Jy, datatype: float64}
+# - {name: annulus_sum, unit: Jy, datatype: float64}
+# - {name: annulus_sum_err, unit: Jy, datatype: float64}
+# - {name: annulus_mean, unit: Jy, datatype: float64}
+# - {name: annulus_mean_err, unit: Jy, datatype: float64}
+# - {name: aperture_bkg, unit: Jy, datatype: float64}
+# - {name: aperture_bkg_err, unit: Jy, datatype: float64}
+# - {name: net_aperture_sum, unit: Jy, datatype: float64}
+# - {name: net_aperture_sum_err, unit: Jy, datatype: float64}
+# meta: !!omap
+# - {instrument: NIRCAM}
+# - {detector: NRCA1}
+# - {channel: SHORT}
+# - {subarray: SUBGRISM256}
+# - {filter: F182M}
+# - {pupil: WLP8}
+# - {target_name: UNKNOWN}
+# - {xcenter: 1980.62}
+# - {ycenter: 166.83}
+# - ra_icrs: !numpy.ndarray
+#     buffer: !!binary |
+#       bVhtTDNieVhVRUE9
+#     dtype: float64
+#     order: C
+#     shape: !!python/tuple []
+# - dec_icrs: !numpy.ndarray
+#     buffer: !!binary |
+#       dDlrUktiV1pQc0E9
+#     dtype: float64
+#     order: C
+#     shape: !!python/tuple []
+# - {apertures: Photometry measured in a circular aperture of r=50.0 pixels.  Background calculated as the mean in a circular annulus
+#     with r_inner=50.0 pixels and r_outer=62.0 pixels.}
+# - {number_of_integrations: 2}
+# - __serialized_columns__:
+#     annulus_mean:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: &id001 !astropy.units.Unit {unit: Jy}
+#       value: !astropy.table.SerializedColumn {name: annulus_mean}
+#     annulus_mean_err:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: annulus_mean_err}
+#     annulus_sum:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: annulus_sum}
+#     annulus_sum_err:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: annulus_sum_err}
+#     aperture_bkg:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: aperture_bkg}
+#     aperture_bkg_err:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: aperture_bkg_err}
+#     aperture_sum:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: aperture_sum}
+#     aperture_sum_err:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: aperture_sum_err}
+#     net_aperture_sum:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: net_aperture_sum}
+#     net_aperture_sum_err:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: net_aperture_sum_err}
+# schema: astropy-2.0
+MJD aperture_sum aperture_sum_err annulus_sum annulus_sum_err annulus_mean annulus_mean_err aperture_bkg aperture_bkg_err net_aperture_sum net_aperture_sum_err
+59884.118125 0.13929924884220812 7.529845420696481e-05 0.04399685601306154 4.654991810425126e-05 1.0420114754436194e-05 1.1024776141093002e-08 0.08183938990524839 8.658838933082452e-05 0.057459858936959735 0.00011474931970545542
+59884.11817176007 0.14134795526346694 7.532551722128644e-05 0.0448565844446744 4.656031603582443e-05 1.0623730869924035e-05 1.102723876342604e-08 0.08343858713667113 8.660773072139961e-05 0.05790936812679581 0.00011478167347344604
