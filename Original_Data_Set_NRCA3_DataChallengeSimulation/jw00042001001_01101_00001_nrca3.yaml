@@ -1,0 +1,134 @@
+Inst:
+  instrument: NIRCAM          # Instrument name
+  mode: ts_imaging                # Observation mode (e.g. imaging, WFSS)
+  use_JWST_pipeline: True   # Use pipeline in data transformations
+
+Readout:
+  readpatt: RAPID        # Readout pattern (RAPID, BRIGHT2, etc) overrides nframe, nskip unless it is not recognized
+  ngroup: 8              # Number of groups in integration
+  nint: 2350          # Number of integrations per exposure
+  namp: 4          # Number of amplifiers used to read out detector
+  resets_bet_ints: 1 #Number of detector resets between integrations
+  array_name: NRCA3_GRISMTS64    # Name of array (FULL, SUB160, SUB64P, etc) overrides subarray_bounds below
+  filter: WLP4       # Filter of simulated data (F090W, F322W2, etc)
+  pupil: CLEAR        # Pupil element for simulated data (CLEAR, GRISMC, etc)
+
+Reffiles:                                 # Set to None or leave blank if you wish to skip that step
+  dark: None   # Dark current integration used as the base
+  linearized_darkfile:  /fenrirdata1/program_data/mirage_data/nircam/darks/linearized/A3/Linearized_Dark_and_SBRefpix_NRCNRCA3-DARK-60091522581_1_483_SE_2016-01-09T16h30m34_uncal.fits  # Linearized dark ramp to use as input. Supercedes dark above
+  badpixmask: crds   # If linearized dark is used, populate output DQ extensions using this file
+  superbias: crds     # Superbias file. Set to None or leave blank if not using
+  linearity: crds    # linearity correction coefficients
+  saturation: crds    # well depth reference files
+  gain: crds # Gain map
+  pixelflat: crds    # Flat field file to use for un-flattening output
+  illumflat: None                               # Illumination flat field file
+  astrometric: crds  # Astrometric distortion file (asdf)
+  photom: crds   # cal pipeline photom reference file
+  ipc: crds # File containing IPC kernel to apply
+  invertIPC: True      # Invert the IPC kernel before the convolution. True or False. Use True if the kernel is designed for the removal of IPC effects, like the JWST reference files are.
+  occult: None                                    # Occulting spots correction image
+  pixelAreaMap: crds      # Pixel area map for the detector. Used to introduce distortion into the output ramp.
+  subarray_defs: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/NIRCam_subarray_definitions.list # File that contains a list of all possible subarray names and coordinates
+  readpattdefs: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/nircam_read_pattern_definitions.list  # File that contains a list of all possible readout pattern names and associated NFRAME/NSKIP values
+  crosstalk: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/xtalk20150303g0.errorcut.txt   # File containing crosstalk coefficients
+  filtpupilcombo: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/nircam_filter_pupil_pairings.list   # File that lists the filter wheel element / pupil wheel element combinations. Used only in writing output file
+  filter_wheel_positions: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/nircam_filter_and_pupil_wheel_positions.txt  # File containing resolver wheel positions for each filter/pupil
+  flux_cal: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/NIRCam_zeropoints.list # File that lists flux conversion factor and pivot wavelength for each filter. Only used when making direct image outputs to be fed into the grism disperser code.
+  filter_throughput: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/placeholder.txt #File containing filter throughput curve
+  
+nonlin:
+  limit: 60000.0                           # Upper singal limit to which nonlinearity is applied (ADU)
+  accuracy: 0.000001                        # Non-linearity accuracy threshold
+  maxiter: 10                              # Maximum number of iterations to use when applying non-linearity
+  robberto:  False                         # Use Massimo Robberto type non-linearity coefficients
+
+cosmicRay:
+  path: /fenrirdata1/program_data/mirage_data/nircam/cosmic_ray_library               # Path to CR library
+  library: SUNMAX    # Type of cosmic rayenvironment (SUNMAX, SUNMIN, FLARE)
+  scale: 1.0     # Cosmic ray scaling factor
+  suffix: IPC_NIRCam_A3    # Suffix of library file names
+  seed: 3759374471                 # Seed for random number generator
+
+simSignals:
+  pointsource: None   #File containing a list of point sources to add (x, y locations and magnitudes)
+  gridded_psf_library_row_padding: 4  # Number of outer rows and columns to avoid when evaluating library. RECOMMEND 4.
+  psf_wing_threshold_file: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/nircam_psf_wing_rate_thresholds.txt   # File defining PSF sizes versus magnitude
+  add_psf_wings: True  # Whether or not to place the core of the psf from the gridded library into an image of the wings before adding.
+  psfpath: /fenrirdata1/program_data/mirage_data/nircam/gridded_psf_library   #Path to PSF library
+  psfwfe: predicted   #PSF WFE value (predicted or requirements)
+  psfwfegroup: 0      #WFE realization group (0 to 4)
+  galaxyListFile: None    #File containing a list of positions/ellipticities/magnitudes of galaxies to simulate
+  extended: None          #Extended emission count rate image file name
+  extendedscale: 1.0                          #Scaling factor for extended emission image
+  extendedCenter: 1024,1024                   #x, y pixel location at which to place the extended image if it is smaller than the output array size
+  PSFConvolveExtended: True #Convolve the extended image with the PSF before adding to the output image (True or False)
+  movingTargetList: None          #Name of file containing a list of point source moving targets (e.g. KBOs, asteroids) to add.
+  movingTargetSersic: None  #ascii file containing a list of 2D sersic profiles to have moving through the field
+  movingTargetExtended: None      #ascii file containing a list of stamp images to add as moving targets (planets, moons, etc)
+  movingTargetConvolveExtended: True       #convolve the extended moving targets with PSF before adding.
+  movingTargetToTrack: None #File containing a single moving target which JWST will track during observation (e.g. a planet, moon, KBO, asteroid)	This file will only be used if mode is set to "moving_target" 
+  tso_imaging_catalog: /fenrirdata1/kg_data/pipeline_output/mirage_GJ436/tso_imaging_source.cat #Catalog of (generally one) source for Imaging Time Series observation
+  tso_grism_catalog: /fenrirdata1/kg_data/pipeline_output/mirage_GJ436/tso_grism_source.cat #Catalog of (generally one) source for Grism Time Series observation
+  zodiacal:  None                          #Zodiacal light count rate image file 
+  zodiscale:  1.0                            #Zodi scaling factor
+  scattered:  None                          #Scattered light count rate image file
+  scatteredscale: 1.0                        #Scattered light scaling factor
+  bkgdrate: medium                         #Constant background count rate (ADU/sec/pixel in an undispersed image) or "high","medium","low" similar to what is used in the ETC
+  poissonseed: 1433129819                  #Random number generator seed for Poisson simulation)
+  photonyield: True                         #Apply photon yield in simulation
+  pymethod: True                            #Use double Poisson simulation for photon yield
+  expand_catalog_for_segments: False                     # Expand catalog for 18 segments and use distinct PSFs
+  use_dateobs_for_background: False          # Use date_obs below to deternine background. If False, bkgdrate is used.
+  signal_low_limit_for_segmap: 0.031         # Lower signal limit to include pix in segmentation map. See below for units.
+  signal_low_limit_for_segmap_units: ADU/sec  # Units of signal_low_limit_for_segmap. Can be: [ADU/sec, e/sec, MJy/sr, ergs/cm2/a, ergs/cm2/hz]
+
+Telescope:
+  ra: 175.55063841755893                      # RA of simulated pointing
+  dec: 26.703145824928058                    # Dec of simulated pointing
+  rotation: 0.0                    # PA_V3 in degrees, i.e. the position angle of the V3 axis at V1 (V2=0, V3=0) measured from N to E.
+  tracking: sidereal   #Telescope tracking. Can be sidereal or non-sidereal
+
+newRamp:
+  dq_configfile: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/dq_init.cfg
+  sat_configfile: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/saturation.cfg
+  superbias_configfile: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/superbias.cfg
+  refpix_configfile: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/refpix.cfg
+  linear_configfile: /home/kglidic/miniconda3/envs/mirage/lib/python3.7/site-packages/mirage/config/linearity.cfg
+
+Output:
+  directory: /fenrirdata1/kg_data/pipeline_output/mirage_GJ436  # Output directory
+  file: jw00042001001_01101_00001_nrca3_uncal.fits   # Output filename
+  datatype: linear, raw # Type of data to save. 'linear' for linearized ramp. 'raw' for raw ramp. 'linear, raw' for both
+  format: DMS          # Output file format Options: DMS, SSR(not yet implemented)
+  save_intermediates: False   # Save intermediate products separately (point source image, etc)
+  grism_source_image: False   # grism
+  unsigned: True   # Output unsigned integers? (0-65535 if true. -32768 to 32768 if false)
+  dmsOrient: True    # Output in DMS orientation (vs. fitswriter orientation).
+  program_number: 00042    # Program Number
+  title: JWST/NIRCam Time-Series Observations of GJ436b   # Program title
+  PI_Name: Thomas Beatty  # Proposal PI Name
+  Proposal_category: GO  # Proposal category
+  Science_category: Exoplanets and Exoplanet Formation  # Science category
+  target_name: ROSS-905  # Name of target
+  target_ra: 175.55053625  # RA of the target, from APT file.
+  target_dec: 26.703066666666665  # Dec of the target, from APT file.
+  observation_number: '001'    # Observation Number
+  observation_label: Baseline GRISMR    # User-generated observation Label
+  visit_number: '001'    # Visit Number
+  visit_group: '01'    # Visit Group
+  visit_id: '00042001001'    # Visit ID
+  sequence_id: '1'    # Sequence ID
+  activity_id: '01'    # Activity ID. Increment with each exposure.
+  exposure_number: '00001'    # Exposure Number
+  obs_id: 'V00042001001P0000000001101'   # Observation ID number
+  date_obs: '2021-10-04'  # Date of observation
+  time_obs: '22:46:23.764'  # Time of observation
+  primary_dither_type: None  # Primary dither pattern name
+  total_primary_dither_positions: 1  # Total number of primary dither positions
+  primary_dither_position: 1  # Primary dither position number
+  subpix_dither_type: None  # Subpixel dither pattern name
+  total_subpix_dither_positions: 1  # Total number of subpixel dither positions
+  subpix_dither_position: 1  # Subpixel dither position number
+  xoffset: 0.0  # Dither pointing offset in x (arcsec)
+  yoffset: 1.449  # Dither pointing offset in y (arcsec)
