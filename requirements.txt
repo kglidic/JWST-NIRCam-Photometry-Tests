@@ -113,7 +113,7 @@ terminado==0.15.0
 tifffile==2022.5.4
 tinycss2==1.1.1
 tomli==2.0.1
-tornado==6.1
+tornado==6.3.2
 tqdm==4.64.0
 traitlets==5.2.2.post1
 tshirt==0.1.dev9
